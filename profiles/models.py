@@ -17,7 +17,7 @@ class Profile(models.Model):
     website = models.URLField(max_length=200, blank=True)
     headline = models.TextField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
-
+    torre_username = models.URLField(max_length=200, blank=True)
     picture = models.ImageField(
         upload_to='profiles/pictures',
         blank=True,

@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from torrein import views
 
 
 urlpatterns = [
     path('profile/', include(('profiles.urls', 'profiles'), namespace='profiles')),
     path('admin/', admin.site.urls),
+    path('callback/', views.linkedin_callback),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

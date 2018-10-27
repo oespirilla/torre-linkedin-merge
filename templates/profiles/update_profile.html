@@ -1,4 +1,4 @@
-{% extends "profiles/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block head_content %}
@@ -10,7 +10,7 @@
 <div class="container">
 
     <div class="row justify-content-md-center">
-        <div class="col-6 p-4" id="profile-box">
+        <div class="col-12 p-4" id="profile-box">
 
             <form action="{% url 'profiles:update' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -84,7 +84,26 @@
                         {% endfor%}
                     </div>
                 </div>
-
+                {# torrebio profile field #}
+                <div class="form-group">
+                    <label>Torre Bio Profile Url</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="torre_username"
+                        placeholder="Torre Bio Profile Url"
+                        value="{{ profile.torre_username }}"
+                    />
+                </div>
+                <div class="form-group">
+                    {% if request.session.access_token %}
+                        <label> Already Authenticated with LinkedIn</label>
+                    {% else%}
+                        <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78evh5k1q2yj6n&redirect_uri=http%3A%2F%2Flocalhost:8000/callback&state=987654321&scope=r_basicprofile">Login with LinkedIn</a>
+                    {% endif %}
+                    
+                </div>
+                
                 <button type="submit" class="btn btn-primary btn-block mt-5">Update info</button>
             </form>
         </div>

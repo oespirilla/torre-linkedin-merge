@@ -47,7 +47,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
     template_name = 'profiles/update_profile.html'
     model = Profile
-    fields = ['website', 'headline', 'phone_number', 'picture']
+    fields = ['website', 'headline', 'phone_number', 'picture', 'torre_username']
 
     def get_object(self):
         """Returns User's Profile"""
