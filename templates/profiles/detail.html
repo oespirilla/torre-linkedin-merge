@@ -1,0 +1,50 @@
+{% extends "profiles/base.html" %}
+
+{% block head_content %}
+<title>@{{ user.username }} | torrebio-in</title>
+{% endblock %}
+
+{% block container %}
+
+    <div class="container mb-5" style="margin-top: 8em;">
+        <div class="row">
+
+            <div class="col-sm-12 d-flex justify-content-center">
+                <img
+                    src="{{ user.profile.picture.url }}"
+                    alt="@{{ user.username}}"
+                    class="rounded-circle"
+                    width="150px"
+                    height="150px"
+                />
+            </div>
+
+            <div class="col-sm-12 d-flex justify-content-center" >
+                <h2 style="font-weight: 100;">
+                    @{{ user.username }}
+                    {% if user == request.user %}
+                        <a
+                            href="{% url 'profiles:update' %}"
+                            class="ml-5 btn btn-sm btn-outline-info"
+                        >
+                            Edit profile
+                        </a>
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center">
+                <p>FirstName: {{ user.first_name }}</p>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center">
+                <p>LastName: {{ user.last_name }}</p>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center">
+                <p>Email: {{ user.email }}</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <hr>
+
+{% endblock %}

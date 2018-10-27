@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'torrein.middleware.ProfileCompletionMiddleware',
 ]
 
 ROOT_URLCONF = 'torrein.urls'
@@ -127,3 +128,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_URL = '/profile/login/'
+LOGIN_REDIRECT_URL = '/profile/me'
+LOGOUT_REDIRECT_URL = LOGIN_URL
