@@ -18,7 +18,6 @@
                     height="150px"
                 />
             </div>
-
             <div class="col-sm-12 d-flex justify-content-center" >
                 <h2 style="font-weight: 100;">
                     @{{ user.username }}
@@ -39,26 +38,35 @@
                 </h2>
             </div>
             <div class="col-sm-12 d-flex justify-content-center">
-                <p>FirstName: {{ user.first_name }}</p>
+                <label>Torre Bio username : </label>
+                <p> {{request.user.profile.torre_username}}</p>
             </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>LastName: {{ user.last_name }}</p>
-            </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>Email: {{ user.email }}</p>
-            </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <p>LinkedIn:</p>
-                {% if request.session.access_token %}
-                    <label> Already Authenticated with LinkedIn</label>
-                {% else%}
-                    <a class="ml-5 btn btn-sm btn-outline-info" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78evh5k1q2yj6n&redirect_uri=http%3A%2F%2Flocalhost:8000/callback&state=987654321&scope=r_basicprofile">Login with LinkedIn</a>
-                {% endif %}
-            </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <p>Torre Bio:</p>
-                <p>{{ user.profile.torre_username }}</p>
-            </div>
+            {% if request.user.profile.torre_username %}
+           
+                <div class="col-sm-12 justify-content-center">
+                    <h4>Name</h4>
+                    <p>{{data.name}}</p>
+                </div>
+                <div class="col-sm-12 justify-content-center">
+                    <h4>Email</h4>
+                    <p>{{data.email}}</p>
+                </div>
+                <div class="col-sm-12 justify-content-center">
+                    <h4>Headline</h4>
+                    <p>{{data.professionalHeadline}}</p>
+                </div>
+                <div class="col-sm-12 justify-content-center">
+                    <h4>Location</h4>
+                    <p>{{data.location}}</p>
+                </div>
+                <div class="col-sm-12 justify-content-center">
+                    <h4>Stats</h4>
+                    <p>{{data.stats}}</p>
+                </div>
+            {% endif %}
+            
+
+            
             
         </div>
     </div>

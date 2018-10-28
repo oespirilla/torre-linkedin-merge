@@ -22,17 +22,16 @@ def linkedin_callback(request):
         }
         response = requests.post(url, data=post_data)
         content = response.json()
-        print (content)
         
         if 'access_token' in content:
             request.session['access_token'] = content['access_token']
             request.session['expires_in'] = content['expires_in']
-            print ('access_token')
+            
             return HttpResponseRedirect(reverse( 'profiles:detail', kwargs={'username': request.user.username}))
     else:
-        print ('error')
+        
         content = 'Error authenticating with LinkedIn'
-
-        return HttpResponseRedirect(reverse( 'profiles:detail', kwargs={'username': request.user.username, 'error' : content}))
+        #I should use an error page
+        return HttpResponseRedirect(reverse( 'profiles:detail', kwargs={'username': request.user.username}))
 
     return HttpResponse(content)

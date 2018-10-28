@@ -1,10 +1,14 @@
-"""Users views."""
+"""Profile views."""
 
 # Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView, UpdateView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+import requests
 
 # Models
 from django.contrib.auth.models import User
@@ -12,6 +16,7 @@ from profiles.models import Profile
 
 # Forms
 from profiles.forms import SignupForm
+
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
@@ -69,3 +74,37 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
     """Logout view."""
 
     template_name = 'profiles/logged_out.html'
+
+@login_required
+def LinkedInView(request):
+    """Returns LinkedIn data"""
+
+    url = 'https://api.linkedin.com/v1/people/~:(location,industry,summary,specialties,positions,public-profile-url,num-connections,picture-url)?format=json'
+    headers = {'Authorization': 'Bearer ' + request.session['access_token']}
+    response = requests.get(url, headers=headers)
+    content = response.json()
+    return render(request, 'profiles/linkedIn.html', {'data': content})
+
+@login_required
+def TorreBioView(request):
+    """Returns Torre Bio data"""
+
+    torre_username = request.user.profile.torre_username
+    url = 'https://torre.bio/api/people/' + torre_username
+    
+    
+    response = requests.get(url)
+    content = response.json()
+    return render(request, 'profiles/torrebio.html', {'data': content})
+
+@login_required
+def MergeView(request):
+    """Returns LinkedIn and Torre Bio data"""
+
+    torre_username = request.user.profile.torre_username
+    url = 'https://torre.bio/api/people/' + torre_username
+    
+    
+    response = requests.get(url)
+    content = response.json()
+    return render(request, 'profiles/merged.html', {'data': content})

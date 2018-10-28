@@ -18,7 +18,6 @@
                     height="150px"
                 />
             </div>
-
             <div class="col-sm-12 d-flex justify-content-center" >
                 <h2 style="font-weight: 100;">
                     @{{ user.username }}
@@ -39,15 +38,6 @@
                 </h2>
             </div>
             <div class="col-sm-12 d-flex justify-content-center">
-                <p>FirstName: {{ user.first_name }}</p>
-            </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>LastName: {{ user.last_name }}</p>
-            </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>Email: {{ user.email }}</p>
-            </div>
-            <div class="col-sm-6 d-flex justify-content-center">
                 <p>LinkedIn:</p>
                 {% if request.session.access_token %}
                     <label> Already Authenticated with LinkedIn</label>
@@ -55,10 +45,50 @@
                     <a class="ml-5 btn btn-sm btn-outline-info" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78evh5k1q2yj6n&redirect_uri=http%3A%2F%2Flocalhost:8000/callback&state=987654321&scope=r_basicprofile">Login with LinkedIn</a>
                 {% endif %}
             </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <p>Torre Bio:</p>
-                <p>{{ user.profile.torre_username }}</p>
+            {% if request.session.access_token %}
+            <div class="col-sm-12 justify-content-center">
+                <h4>Linked In URL</h4>
+                <p>{{data.publicProfileUrl}}</p>
             </div>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Linked In Bio</h4>
+                <p>{{data.summary}}</p>
+            </div>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Industry</h4>
+                <p>{{data.industry}}</p>
+            </div>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Location</h4>
+                <p>{{data.location.name}}</p>
+            </div>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Number of Connections</h4>
+                <p>{{data.numConnections}}</p>
+            </div>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Job History</h4>
+                {% for obj in data.positions.values %} 
+                    <h5>Position</h5>
+                    {{obj.title}}
+                    <h5>Company</h5>
+                    {{obj.company.name}}
+                    <h5>Industry</h5>
+                    {{obj.company.industry}}
+                    <h5>Type</h5>
+                    {{obj.company.type}}
+                    <h5>Start Year</h5>
+                    {{obj.startDate.year}}
+                {% endfor %}
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center">
+                
+
+            </div>
+            {% endif %}
+            
+
+            
             
         </div>
     </div>
