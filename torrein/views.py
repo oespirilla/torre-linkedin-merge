@@ -6,6 +6,12 @@ from django.conf import settings
 
 import requests
 
+def index(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse( 'profiles:detail', kwargs={'username': request.user.username}))
+    else:
+        return HttpResponseRedirect(reverse( 'profiles:login'))
+
 def linkedin_callback(request):
 
     if 'code' in request.GET:

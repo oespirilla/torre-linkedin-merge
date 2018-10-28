@@ -78,12 +78,15 @@ class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
 @login_required
 def LinkedInView(request):
     """Returns LinkedIn data"""
-
-    url = 'https://api.linkedin.com/v1/people/~:(location,industry,summary,specialties,positions,public-profile-url,num-connections,picture-url)?format=json'
-    headers = {'Authorization': 'Bearer ' + request.session['access_token']}
-    response = requests.get(url, headers=headers)
-    content = response.json()
-    return render(request, 'profiles/linkedIn.html', {'data': content})
+    if 'access_token' in request.session :
+        url = 'https://api.linkedin.com/v1/people/~:(location,industry,summary,specialties,positions,public-profile-url,num-connections,picture-url)?format=json'
+        headers = {'Authorization': 'Bearer ' + request.session['access_token']}
+        response = requests.get(url, headers=headers)
+        content = response.json()
+    else:
+        content = 'No data'
+    
+    return render(request, 'profiles/linkedin.html', {'data': content})
 
 @login_required
 def TorreBioView(request):

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Welcome to torrebio-in</title>
+{% endblock %}
+
+{% block container %}
+
+    <p class="mt-4">Don't have an account yet? <a href="{% url 'profiles:signup' %}">Sign up here.</a></p>
+
+{% endblock %}

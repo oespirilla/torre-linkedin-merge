@@ -21,6 +21,7 @@ from torrein import views
 
 
 urlpatterns = [
+    path('', views.index),
     path('profile/', include(('profiles.urls', 'profiles'), namespace='profiles')),
     path('admin/', admin.site.urls),
     path('callback/', views.linkedin_callback),
