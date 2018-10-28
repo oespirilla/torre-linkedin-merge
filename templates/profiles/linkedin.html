@@ -19,24 +19,10 @@
                 />
             </div>
             <div class="col-sm-12 d-flex justify-content-center" >
-                <h2 style="font-weight: 100;">
-                    @{{ user.username }}
-                    {% if user == request.user %}
-                        <a
-                            href="{% url 'profiles:update' %}"
-                            class="ml-5 btn btn-sm btn-outline-info"
-                        >
-                            Edit profile
-                        </a>
-                        <a
-                            href="{% url 'profiles:logout' %}"
-                            class="ml-5 btn btn-sm btn-outline-info"
-                        >
-                            Logout
-                        </a>
-                    {% endif %}
-                </h2>
-            </div>
+                    <h2 style="font-weight: 100;">
+                        @{{ user.username }}
+                    </h2>
+                </div>
             <div class="col-sm-12 d-flex justify-content-center">
                 <p>LinkedIn:</p>
                 {% if request.session.access_token %}

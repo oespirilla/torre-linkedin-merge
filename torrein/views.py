@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.conf import settings
+
 
 import requests
 
@@ -9,9 +11,9 @@ def linkedin_callback(request):
     if 'code' in request.GET:
         url = 'https://www.linkedin.com/oauth/v2/accessToken'
         code = request.GET['code']
-        redirect_uri = 'http://localhost:8000/callback'
-        client_id = '78evh5k1q2yj6n'
-        client_secret = 'BE08KtvZ8WUrJcgj'
+        redirect_uri = settings.LINKEDIN_CALLBACK
+        client_id = settings.LINKEDIN_CLIENT
+        client_secret = settings.LINKEDIN_SECRET
 
         post_data = {
             'grant_type': 'authorization_code',

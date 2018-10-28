@@ -22,41 +22,30 @@
             <div class="col-sm-12 d-flex justify-content-center" >
                 <h2 style="font-weight: 100;">
                     @{{ user.username }}
-                    {% if user == request.user %}
-                        <a
-                            href="{% url 'profiles:update' %}"
-                            class="ml-5 btn btn-sm btn-outline-info"
-                        >
-                            Edit profile
-                        </a>
-                        <a
-                            href="{% url 'profiles:logout' %}"
-                            class="ml-5 btn btn-sm btn-outline-info"
-                        >
-                            Logout
-                        </a>
-                    {% endif %}
                 </h2>
             </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>FirstName: {{ user.first_name }}</p>
+            <div class="col-sm-12  justify-content-center">
+                <h4>FirstName:</h4>
+                <p> {{ user.first_name }}</p>
             </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>LastName: {{ user.last_name }}</p>
+            <div class="col-sm-12 justify-content-center">
+                <h4>LastName:</h4>
+                <p> {{ user.last_name }}</p>
             </div>
-            <div class="col-sm-12 d-flex justify-content-center">
-                <p>Email: {{ user.email }}</p>
+            <div class="col-sm-12 justify-content-center">
+                <h4>Email:</h4>
+                <p> {{ user.email }}</p>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <p>LinkedIn:</p>
+            <div class="col-sm-6  justify-content-center">
+                <h4>LinkedIn:</h4>
                 {% if request.session.access_token %}
                     <label> Already Authenticated with LinkedIn</label>
                 {% else%}
-                    <a class="ml-5 btn btn-sm btn-outline-info" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78evh5k1q2yj6n&redirect_uri=http%3A%2F%2Flocalhost:8000/callback&state=987654321&scope=r_basicprofile">Login with LinkedIn</a>
+                    <a class="ml-5 btn btn-sm btn-info" href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78evh5k1q2yj6n&redirect_uri=http%3A%2F%2Flocalhost:8000/callback&state=987654321&scope=r_basicprofile">Login with LinkedIn</a>
                 {% endif %}
             </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <p>Torre Bio:</p>
+            <div class="col-sm-6  justify-content-center">
+                <h4>Torre Bio:</h4>
                 <p>{{ user.profile.torre_username }}</p>
             </div>
             

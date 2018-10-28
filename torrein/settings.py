@@ -79,8 +79,11 @@ WSGI_APPLICATION = 'torrein.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.environ['DB_NAME'],
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': os.environ['DB_HOST'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
     }
 }
 
@@ -135,3 +138,18 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/profile/login/'
 LOGIN_REDIRECT_URL = '/profile/me'
 LOGOUT_REDIRECT_URL = LOGIN_URL
+
+LINKEDIN_CLIENT= os.environ['LINKEDIN_CLIENT'],
+LINKEDIN_SECRET= os.environ['LINKEDIN_SECRET'],
+LINKEDIN_CALLBACK= os.environ['LINKEDIN_CALLBACK'],
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = os.environ['STATIC_URL']
+
+# collectstatic directory (located OUTSIDE the base directory)
+# TODO: configure the name and path to your static bucket directory (where collectstatic will copy to)
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = os.environ['GS_BUCKET_NAME']
+GS_DEFAULT_ACL = 'publicRead'
